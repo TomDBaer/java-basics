@@ -13,11 +13,11 @@ class Auto {
 }
 
 // Klasse Liste
-class AutoFabrik {
+class AutoHaendler {
     Auto anfang;
 
     // Konstruktor
-    AutoFabrik() {
+    AutoHaendler() {
         this.anfang = null;
     }
 
@@ -61,9 +61,9 @@ class AutoFabrik {
     }
 }
 
-public class Basic_linked {
+public class BasicLinked {
     public static void main(String[] args) {
-        var neueListe = new AutoFabrik();
+        var neueListe = new AutoHaendler();
 
         neueListe.add("Audi");
         neueListe.add("Mercedes");
