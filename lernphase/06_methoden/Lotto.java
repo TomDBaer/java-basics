@@ -4,23 +4,25 @@
  * Wir haben 6 fixe Zahlen
  * Wie oft wird gespielt bis man gewonnen hat
  * Es interresiert nur ein 6er Gewinn, nichts anderes
+ * 
+ * !Es kann noch immer passieren das ich doppelte Nummern in meinem Array habe 
  */
 
 import java.util.Random;
 
 public class Lotto {
+    public static final Random zufall = new Random();
+
     public static void main(String[] args) {
-        int[] meineZahlen = { 4, 8, 22, 23, 48, 1 };
+        int[] meineZahlen = { 13, 23, 18, 8, 39, 19 };
         int[] lottoZahlen = new int[6];
 
         // Ueberpruefen ob man alle 6 Zahlen, wie oft mustte man spielen
         boolean gewonnen = false;
         int spiele = 0;
 
-        // lottoZahlen = lottoRandomArray();
-        // System.out.println(Arrays.toString(lottoZahlen));
-
         while (!gewonnen) {
+            // while (spiele <= 1000) {
             lottoZahlen = lottoRandomArray();
             int gleicheZahlen = vergleich(meineZahlen, lottoZahlen);
             if (gleicheZahlen == 6) {
@@ -29,7 +31,7 @@ public class Lotto {
             spiele++;
         }
 
-        System.out.println("Du hast Spiele: " + spiele);
+        System.out.println("Du hast " + spiele + " Spiele gespielt bis du einen Secher bekommen hast!");
 
     }
 
@@ -41,27 +43,20 @@ public class Lotto {
         int[] num = new int[6];
 
         for (int i = 0; i < num.length; i++) {
-
-            for (int j = 0; j < num.length; j++) {
-                if (num[j] == zufallsZahl(MIN, MAX)) {
-                    /*
-                     * Sollte eine Zahl schon vorhanden sein wird eine
-                     * neue Liste generiert.
-                     * Es waere auch moeglich die Zahl zu ersetzen
-                     */
-                    lottoRandomArray();
+            int zahl = zufallsZahl(MIN, MAX);
+            for (int j : num) {
+                if (j == zahl) {
+                    zahl = zufallsZahl(MIN, MAX);
                 }
             }
-            num[i] += zufallsZahl(MIN, MAX);
-
+            num[i] = zahl;
         }
 
         return num;
     }
 
     public static int zufallsZahl(int min, int max) {
-        var zufallsZahl = new Random().nextInt(min, max + 1);
-        return zufallsZahl;
+        return zufall.nextInt(min, max + 1);
     }
 
     // Methode: Lotto zahlen mit meinen zahlen vergleichen
